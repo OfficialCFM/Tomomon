@@ -36,14 +36,7 @@
 #define FREE(ptr) free(ptr); ptr = NULL
 
 /* Widely used structs */
-struct kpVec2i
-{
-	int x, y;
-};
-
-struct kpVec2f
-{
-	float x, y;
-};
+struct kpVec2i { int32_t x, y; };
+struct kpVec2f { float_t x, y; };
 
 #endif /* _kpCommon_h_ */

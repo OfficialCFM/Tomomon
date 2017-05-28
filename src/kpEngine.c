@@ -1,5 +1,4 @@
 #include "kpEngine.h"
-#include "kpFont.h"
 
 static int ticks = 0;
 static struct kpBitmap *test = NULL;
@@ -20,7 +19,7 @@ struct kpEngine *kpCreateEngine(enum kpStatus *status)
 
 	test = kpLoadBitmap("Project/assets/map.png");
 	fnt = kpLoadFont("Project/assets/font.ttf", 8);
-	map = kpCreateMap(16, 16);
+	map = kpCreateMap(20, 16);
 
 	return engine;
 }

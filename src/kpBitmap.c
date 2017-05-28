@@ -5,18 +5,17 @@
 
 uint32_t kpBlendPix(uint32_t s0, uint32_t s1)
 {
-	const int AMASK = 0xFF000000;
-	const int RBMASK = 0x00FF00FF;
-	const int GMASK = 0x0000FF00;
-	const int AGMASK = AMASK | GMASK;
-	const int ONEALPHA = 0x01000000;
+	int32_t masks[4];
+	masks[0] = 0xFF000000;
+	masks[1] = 0x00FF00FF;
+	masks[2] = 0xFF00FF00;
+	masks[3] = 0x0000FF00;
 
-	unsigned int a = (s1 & AMASK) >> 24;
-	unsigned int na = 255 - a;
-	unsigned int rb = ((na * (s0 & RBMASK)) + (a * (s1 & RBMASK))) >> 8;
-	unsigned int ag = (na * ((s0 & AGMASK) >> 8)) + (a * (ONEALPHA | ((s1 & GMASK) >> 8)));
+	uint32_t a = (s1 & masks[0]) >> 24;
+	uint32_t rb = ((0xFF - a) * (s0 & masks[1]) + (a * (s1 & masks[1]))) >> 8;
+	uint32_t ag = ((0xFF - a) * (s0 & masks[2] >> 8)) + (a * (1 << 24 | (s1 & masks[3]) >> 8));
 
-	return ((rb & RBMASK) | (ag & AGMASK));
+	return (rb & masks[1]) | (ag & masks[2]);
 }
 
 struct kpBitmap *kpCreateBitmap(int32_t w, int32_t h)
@@ -69,16 +68,14 @@ void kpDestroyBitmap(struct kpBitmap *bitmap)
 
 void kpDrawBitmap(struct kpBitmap *dest, struct kpBitmap *src, int32_t xo, int32_t yo)
 {
-	uint32_t x, y;
-
-	for (x = 0; x < src->w; ++x)
+	for (uint32_t x = 0; x < src->w; ++x)
 	{
 		int32_t xp = x + xo;
 
 		if (xp < 0 || xp >= dest->w)
 			continue;
 
-		for (y = 0; y < src->h; ++y)
+		for (uint32_t y = 0; y < src->h; ++y)
 		{
 			int32_t yp = y + yo;
 
@@ -93,16 +90,14 @@ void kpDrawBitmap(struct kpBitmap *dest, struct kpBitmap *src, int32_t xo, int32
 
 void kpDrawCroppedBitmap(struct kpBitmap *dest, struct kpBitmap *src, int32_t xo, int32_t yo, int32_t xc, int32_t yc, int32_t w, int32_t h)
 {
-	uint32_t x, y;
-
-	for (x = 0; x < w; ++x)
+	for (uint32_t x = 0; x < w; ++x)
 	{
 		int32_t xp = x + xo;
 
 		if (xp < 0 || xp >= dest->w)
 			continue;
 
-		for (y = 0; y < h; ++y)
+		for (uint32_t y = 0; y < h; ++y)
 		{
 			int32_t yp = y + yo;
 
@@ -117,8 +112,6 @@ void kpDrawCroppedBitmap(struct kpBitmap *dest, struct kpBitmap *src, int32_t xo
 
 void kpClearBitmap(struct kpBitmap *bitmap, uint32_t color)
 {
-	uint32_t i;
-
-	for (i = 0; i < bitmap->w * bitmap->h; ++i)
+	for (uint32_t i = 0; i < bitmap->w * bitmap->h; ++i)
 		bitmap->px[i] = color;
 }

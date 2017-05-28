@@ -39,7 +39,6 @@ enum kpStatus kpCreateLogger(void)
 {
 	char buffer[22], prefix[] = "Log file created ";
 	time_t timer;
-	int8_t i;
 
 	logFile = fopen("./logfile.txt", "w");
 
@@ -52,7 +51,7 @@ enum kpStatus kpCreateLogger(void)
 
 	fprintf(logFile, "%s%s\n", prefix, buffer);
 
-	for (i = 0; i < strlen(buffer) + strlen(prefix); ++i)
+	for (uint32_t i = 0; i < strlen(buffer) + strlen(prefix); ++i)
 		fprintf(logFile, "=");
 
 	fprintf(logFile, "\n\n");

@@ -4,6 +4,8 @@
 #include "kpCommon.h"
 #include "kpBitmap.h"
 
+extern struct kpBitmap *tileSheet;
+
 struct kpTile
 {
 	uint32_t x, y;

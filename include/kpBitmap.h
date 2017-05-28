@@ -3,10 +3,6 @@
 
 #include "kpCommon.h"
 #include "kpError.h"
-#include "kpFont.h"
-#include "kpGUI.h"
-
-struct kpPanel;
 
 struct kpBitmap
 {

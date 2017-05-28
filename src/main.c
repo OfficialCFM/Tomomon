@@ -2,9 +2,9 @@
 #include "kpEngine.h"
 
 /*
- * Some info for the window and bitmap creation
+ * Some info for the window creation
  */
-static const LPCTSTR WIN_CLASS = "KpEngine";
+static const LPCTSTR WIN_CLASS = "TomodachiMonsters";
 static const LPCTSTR WIN_TITLE = "Tomodachi Monsters";
 
 /*
@@ -35,7 +35,6 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 	case WM_KILLFOCUS:
 		ZeroMemory(engineInstance->keys, sizeof engineInstance->keys);
 		break;
-
 
 	case WM_DESTROY:
 		PostQuitMessage(0);

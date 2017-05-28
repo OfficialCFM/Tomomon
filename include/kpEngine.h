@@ -5,8 +5,8 @@
 #include "kpError.h"
 #include "kpBitmap.h"
 #include "kpInput.h"
-#include "kpGUI.h"
 #include "kpTiles.h"
+#include "kpGui.h"
 
 struct kpEngine
 {
