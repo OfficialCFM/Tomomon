@@ -1,4 +1,4 @@
-#include <kpGui.h>
+#include "kpGui.h"
 
 struct kpBitmap *panelSheet = NULL;
 
