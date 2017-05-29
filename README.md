@@ -1,6 +1,6 @@
 # Tomomon
 
-![img](https://i.imgur.com/sDsyUN9.png)
+![img](https://i.imgur.com/Sxcqw5B.png)
 
 ## Building
 ### Windows
