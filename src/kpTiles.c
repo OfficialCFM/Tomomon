@@ -1,7 +1,5 @@
 #include "kpTiles.h"
 
-#define TILE_SIZE 8
-
 struct kpBitmap *tileSheet = NULL;
 
 struct kpMap *kpCreateMap(uint32_t w, uint32_t h)
@@ -10,6 +8,7 @@ struct kpMap *kpCreateMap(uint32_t w, uint32_t h)
 	map->data = ALLOCS(struct kpTile, w * h);
 	map->w = w; map->h = h;
 
+	/* Generate a temporary map for now */
 	for (uint32_t i = 0; i < w; ++i)
 	{
 		for (uint32_t j = 0; j < h; ++j)
@@ -17,8 +16,15 @@ struct kpMap *kpCreateMap(uint32_t w, uint32_t h)
 			map->data[i + j * w].x = i;
 			map->data[i + j * w].y = j;
 
-			map->data[i + i * w].sx = 1;
-			map->data[(w - 1 - i) + i * w].sx = 1;
+			if (i == 0 || j == 0 || i == w - 1 || j == h - 1)
+			{
+				map->data[i + j * w].sx = 2;
+			}
+			else
+			{
+				map->data[(i)         + i * w].sx = 1;
+				map->data[(w - 1 - i) + i * w].sx = 1;
+			}
 		}
 	}
 

@@ -2,11 +2,11 @@
 #define _kpEngine_h_
 
 #include "kpCommon.h"
-#include "kpError.h"
 #include "kpBitmap.h"
+#include "kpError.h"
 #include "kpInput.h"
+#include "kpInterface.h"
 #include "kpTiles.h"
-#include "kpGui.h"
 
 struct kpEngine
 {

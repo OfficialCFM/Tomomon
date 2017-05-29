@@ -1,6 +1,8 @@
 #ifndef _kpInput_h_
 #define _kpInput_h_
 
+#include "kpCommon.h"
+
 enum kpKeyboard
 {
 	KP_KEY_UNKNOWN = -1,

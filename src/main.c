@@ -50,6 +50,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
  */
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow)
 {
+	/* Initialize the engine itself, check for errors */
 	enum kpStatus engineError = KP_UNKNOWN_ERROR;
 	engineInstance = kpCreateEngine(&engineError);
 
@@ -57,6 +58,8 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 		kpLogError(kpParseError(engineError));
 	else
 		engineInstance->running = true;
+
+	kpLogInfo("Engine initialized.");
 
 	/* Setup Win32 window class */
 	WNDCLASS wndClass = { 0 };

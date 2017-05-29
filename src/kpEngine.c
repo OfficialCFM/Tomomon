@@ -19,7 +19,7 @@ struct kpEngine *kpCreateEngine(enum kpStatus *status)
 
 	test = kpLoadBitmap("Project/assets/map.png");
 	fnt = kpLoadFont("Project/assets/font.ttf", 8);
-	map = kpCreateMap(20, 16);
+	map = kpCreateMap(31, 31);
 
 	return engine;
 }
@@ -28,21 +28,17 @@ void kpEngineTick(struct kpEngine *engine)
 {
 	ticks++;
 
-	if (engine->keys[KP_KEY_W])
-		cam.y -= 1;
-	if (engine->keys[KP_KEY_S])
-		cam.y += 1;
-	if (engine->keys[KP_KEY_A])
-		cam.x -= 1;
-	if (engine->keys[KP_KEY_D])
-		cam.x += 1;
+	if (engine->keys[KP_KEY_W])	cam.y--;
+	if (engine->keys[KP_KEY_S])	cam.y++;
+	if (engine->keys[KP_KEY_A]) cam.x--;
+	if (engine->keys[KP_KEY_D])	cam.x++;
 }
 
 void kpEngineRender(struct kpEngine *engine)
 {
-	kpClearBitmap(engine->bmp, 0x000000);
-
 	struct kpPanel panel = { 0, BMP_H - (6 * 8), 18, 4 };
+
+	kpClearBitmap(engine->bmp, 0x000000);
 	kpDrawMap(map, engine->bmp, &cam);
 	kpDrawPanel(engine->bmp, &panel);
 	kpDrawFontString(engine->bmp, fnt, "Welcome to the\nworld of TOMOMON!", 9, 17 + BMP_H - 6 * 8);
