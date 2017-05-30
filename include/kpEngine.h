@@ -6,7 +6,9 @@
 #include "kpError.h"
 #include "kpInput.h"
 #include "kpInterface.h"
+#include "kpEntity.h"
 #include "kpTiles.h"
+#include "kpVector.h"
 
 struct kpEngine
 {

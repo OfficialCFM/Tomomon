@@ -11,7 +11,6 @@
 extern struct kpBitmap *panelSheet;
 
 #define MAX_CHARS 128
-#define GUI_WIDTH 8
 
 /*
  * All of the information needed for drawing a character

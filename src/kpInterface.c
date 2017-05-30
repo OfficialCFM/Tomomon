@@ -102,24 +102,36 @@ void kpDrawPanel(struct kpBitmap *dest, struct kpPanel *src)
 	if (!panelSheet)
 		panelSheet = kpLoadBitmap("Project/assets/gui.png");
 
-	kpDrawCroppedBitmap(dest, panelSheet, src->x, src->y, 8 * 0, 8 * 0, 8, 8);
-	kpDrawCroppedBitmap(dest, panelSheet, (src->x + 8) + src->w * 8, src->y, 8 * 1, 8 * 0, 8, 8);
+	int32_t right = (src->x + TILE_SIZE) + src->w * TILE_SIZE,
+			bottom = (src->y + TILE_SIZE) + src->h * TILE_SIZE,
+			left = src->x, top = src->y;
+
+	kpDrawCroppedBitmap(dest, panelSheet, left, top, TILE_SIZE * 0, TILE_SIZE * 0, TILE_SIZE, TILE_SIZE);
+	kpDrawCroppedBitmap(dest, panelSheet, right, top, TILE_SIZE * 1, TILE_SIZE * 0, TILE_SIZE, TILE_SIZE);
 
 	for (uint32_t i = 0; i < src->w; ++i)
 	{
-		kpDrawCroppedBitmap(dest, panelSheet, src->x + 8 + (i * 8), src->y, 8 * 2, 8 * 1, 8, 8);
-		kpDrawCroppedBitmap(dest, panelSheet, src->x + 8 + (i * 8), (src->y + 8) + src->h * 8, 8 * 2, 8 * 1, 8, 8);
+		int32_t x = src->x + TILE_SIZE + (i * TILE_SIZE);
+
+		kpDrawCroppedBitmap(dest, panelSheet, x, top, TILE_SIZE * 2, TILE_SIZE * 1, TILE_SIZE, TILE_SIZE);
+		kpDrawCroppedBitmap(dest, panelSheet, x, bottom, TILE_SIZE * 2, TILE_SIZE * 1, TILE_SIZE, TILE_SIZE);
 
 		for (uint32_t j = 0; j < src->h; ++j)
-			kpDrawCroppedBitmap(dest, panelSheet, src->x + 8 + (i * 8), src->y + 8 + (j * 8), 8 * 0, 8 * 3, 8, 8);
+		{
+			int32_t y = src->y + TILE_SIZE + (j * TILE_SIZE);
+
+			kpDrawCroppedBitmap(dest, panelSheet, x, y, TILE_SIZE * 0, TILE_SIZE * 3, TILE_SIZE, TILE_SIZE);
+		}
 	}
 
 	for (uint32_t j = 0; j < src->h; ++j)
 	{
-		kpDrawCroppedBitmap(dest, panelSheet, src->x, src->y + 8 + (j * 8), 8 * 3, 8 * 0, 8, 8);
-		kpDrawCroppedBitmap(dest, panelSheet, (src->x + 8) + src->w * 8, src->y + 8 + (j * 8), 8 * 2, 8 * 0, 8, 8);
+		int32_t y = src->y + TILE_SIZE + (j * TILE_SIZE);
+
+		kpDrawCroppedBitmap(dest, panelSheet, left, y, TILE_SIZE * 3, TILE_SIZE * 0, TILE_SIZE, TILE_SIZE);
+		kpDrawCroppedBitmap(dest, panelSheet, right, y, TILE_SIZE * 2, TILE_SIZE * 0, TILE_SIZE, TILE_SIZE);
 	}
 
-	kpDrawCroppedBitmap(dest, panelSheet, src->x, (src->y + 8) + src->h * 8, 8 * 0, 8 * 1, 8, 8);
-	kpDrawCroppedBitmap(dest, panelSheet, (src->x + 8) + src->w * 8, (src->y + 8) + src->h * 8, 8 * 1, 8 * 1, 8, 8);
+	kpDrawCroppedBitmap(dest, panelSheet, left, bottom, TILE_SIZE * 0, TILE_SIZE * 1, TILE_SIZE, TILE_SIZE);
+	kpDrawCroppedBitmap(dest, panelSheet, right, bottom, TILE_SIZE * 1, TILE_SIZE * 1, TILE_SIZE, TILE_SIZE);
 }

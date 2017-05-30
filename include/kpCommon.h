@@ -30,9 +30,13 @@
 #define BMP_W 160 /* WIN_W / 4 */
 #define BMP_H 144 /* WIN_H / 4 */
 
+/* For sprite sheets */
+#define TILE_SIZE 8
+
 /* To assist in memory allocation */
 #define ALLOC(type) calloc(1, sizeof(type))
 #define ALLOCS(type, size) calloc(size, sizeof(type))
+#define REALLOC(ptr, type, size) realloc(ptr, sizeof(type) * (size))
 #define FREE(ptr) free(ptr); ptr = NULL
 
 /* Widely used structs */

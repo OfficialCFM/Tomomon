@@ -6,8 +6,6 @@
 
 extern struct kpBitmap *tileSheet;
 
-#define TILE_SIZE 8
-
 struct kpTile
 {
 	uint32_t x, y;

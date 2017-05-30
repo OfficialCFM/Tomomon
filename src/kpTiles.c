@@ -34,6 +34,7 @@ struct kpMap *kpCreateMap(uint32_t w, uint32_t h)
 struct kpMap *kpLoadMap(char *path)
 {
 	/* Implement this later */
+
 	return NULL;
 }
 
