@@ -19,10 +19,13 @@ struct kpMap *kpCreateMap(uint32_t w, uint32_t h)
 			if (i == 0 || j == 0 || i == w - 1 || j == h - 1)
 			{
 				map->data[i + j * w].sx = 2;
+				map->data[i + j * w].solid = true;
 			}
 			else
 			{
 				map->data[(i)         + i * w].sx = 1;
+				map->data[(i)         + i * w].solid = true;
+				map->data[(w - 1 - i) + i * w].solid = true;
 				map->data[(w - 1 - i) + i * w].sx = 1;
 			}
 		}
@@ -36,6 +39,16 @@ struct kpMap *kpLoadMap(char *path)
 	/* Implement this later */
 
 	return NULL;
+}
+
+struct kpTile kpGetTile(struct kpMap *map, int32_t x, int32_t y)
+{
+	struct kpTile empty = { x, y, 7, 7, false };
+
+	if (x < 0 || y < 0 || x >= map->w || y >= map->h)
+		return empty;
+
+	return map->data[x + y * map->w];
 }
 
 void kpDrawMap(struct kpMap *map, struct kpBitmap *dest, struct kpVec2f *cam)

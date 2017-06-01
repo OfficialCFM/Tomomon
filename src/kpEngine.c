@@ -32,7 +32,7 @@ struct kpEngine *kpCreateEngine(enum kpStatus *status)
 	map = kpCreateMap(15, 15);
 
 	list = kpCreateVector();
-	kpAddToEntityList(list, kpCreateEntity(2, 2, 0, 0, TILE_SIZE * 2, TILE_SIZE * 2, KP_ENTITY_PLAYER));
+	kpAddToEntityList(list, kpCreateEntity(map, 6, 2, 0, 0, TILE_SIZE * 2, TILE_SIZE * 2, KP_ENTITY_PLAYER));
 
 	return engine;
 }
@@ -45,15 +45,15 @@ void kpEngineTick(struct kpEngine *engine)
 
 	if (player) /* TODO: Actual Pokemon-styled movement */
 	{
-		if (engine->keys[KP_KEY_W])	player->pos.y--;
-		if (engine->keys[KP_KEY_S])	player->pos.y++;
-		if (engine->keys[KP_KEY_A]) player->pos.x--;
-		if (engine->keys[KP_KEY_D])	player->pos.x++;
+		if (engine->keys[KP_KEY_W])	kpMoveEntity(player,  0, -1);
+		if (engine->keys[KP_KEY_S])	kpMoveEntity(player,  0,  1);
+		if (engine->keys[KP_KEY_A]) kpMoveEntity(player, -1,  0);
+		if (engine->keys[KP_KEY_D])	kpMoveEntity(player,  1,  0);
 	}
 
 	if (engine->keys[KP_KEY_R])
 	{
-		kpAddToVector(list, kpCreateEntity((rand() % 14), (rand() % 14), 0, 0, 16, 16, KP_ENTITY_NPC));
+		kpAddToVector(list, kpCreateEntity(map, (rand() % 14), (rand() % 14), 0, 0, 16, 16, KP_ENTITY_NPC));
 		engine->keys[KP_KEY_R] = false;
 	}
 

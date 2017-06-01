@@ -10,6 +10,7 @@ struct kpTile
 {
 	uint32_t x, y;
 	uint32_t sx, sy;
+	bool solid;
 };
 
 struct kpMap
@@ -20,6 +21,7 @@ struct kpMap
 
 struct kpMap *kpCreateMap(uint32_t w, uint32_t h);
 struct kpMap *kpLoadMap(char *path);
+struct kpTile kpGetTile(struct kpMap *map, int32_t x, int32_t y);
 void kpDrawMap(struct kpMap *map, struct kpBitmap *dest, struct kpVec2f *cam);
 void kpDestroyMap(struct kpMap *map);
 
